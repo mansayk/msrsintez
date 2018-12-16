@@ -30,12 +30,20 @@ function showPlay()
 {
 	document.getElementById("picPlay").style.display = "inline-block";
 	document.getElementById("picPause").style.display = "none";
+
+	// Bootstrap support (class="d-none")
+	document.getElementById("picPlay").classList.remove('d-none');
+	document.getElementById("picPause").classList.add('d-none');
 }
 
 function showPause()
 {
 	document.getElementById("picPlay").style.display = "none";
 	document.getElementById("picPause").style.display = "inline-block";
+	
+	// Bootstrap support (class="d-none")
+	document.getElementById("picPlay").classList.add('d-none');
+	document.getElementById("picPause").classList.remove('d-none');
 }
 
 function fint2cyrtr(strin)
@@ -106,7 +114,7 @@ function onUpdate()
 		msraudio_html5_temp = msraudio_html5;
 		msraudio_html5 = msraudio_html5_next;
 		msraudio_html5_next = msraudio_html5_temp;
-        
+		
 		if(global_msrpos < global_msrsize) {
 			global_continue = true;
 		} else {
@@ -137,10 +145,10 @@ function onUpdate()
 			msraudio_flash.SetVariable("method:setContinue", "false");
 		}
 		msraudio_flash.SetVariable("method:play", "");
-		
+	
 		// Preload next sentence
 		if(global_msrpos < global_msrsize) {
-		global_temp = encodeURI(global_msrtext[global_msrpos + 1]);
+			global_temp = encodeURI(global_msrtext[global_msrpos + 1]);
 			msraudio_flash_next.SetVariable("method:setUrl", global_url+global_temp);
 			msraudio_flash_next.SetVariable("method:play", "");
 			msraudio_flash_next.SetVariable("method:pause", "");
@@ -181,12 +189,12 @@ function play(msrtext)
 		}
 	} else {
 		if(global_stop == 1 || !msraudio_html5) {
-			
+	    
 			if(msraudio_html5) {
 				msraudio_html5.pause();
 				msraudio_html5.currentTime = 0;
 			}
-			
+	    
 			msraudio_html5 = new Audio();
 			msraudio_html5_next = new Audio();
 			
